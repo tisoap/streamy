@@ -1,6 +1,7 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import GoogleAuth from './GoogleAuth'
 
 const Header = () => {
   return (
@@ -12,6 +13,9 @@ const Header = () => {
         <Link to="/">
           <Menu.Item name='All streams' />
         </Link>
+        <Menu.Item>
+          <GoogleAuth />
+        </Menu.Item>
       </Menu.Menu>
     </Menu>
   )
