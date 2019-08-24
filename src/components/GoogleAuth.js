@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { Button, Icon } from 'semantic-ui-react'
 
 const clientId = '612120061601-fad4746f2th6prllejgq8db7tvuue4i7.apps.googleusercontent.com'
 
-class GoogleAuth  extends Component {
+class GoogleAuth extends Component {
   constructor (props) {
     super(props)
     this.auth = null
@@ -19,29 +20,59 @@ class GoogleAuth  extends Component {
       }).then(() => {
         this.auth = window.gapi.auth2.getAuthInstance()
         this.setState({ isSignedIn: this.auth.isSignedIn.get() })
+        this.auth.isSignedIn.listen(this.onAuthChange)
       })
     })
+  }
+
+  onAuthChange = () => {
+    this.setState({
+      isSignedIn: this.auth.isSignedIn.get(),
+    })
+  }
+
+  onSignInClick = () => {
+    this.auth.signIn()
+  }
+
+  onSignOutClick = () => {
+    this.auth.signOut()
   }
 
   renderAuthButton () {
     const { isSignedIn } = this.state
 
     if (isSignedIn === null) {
-      return <div>Checking...</div>
+      return (
+        <Button color='google plus'>
+          <Icon name='google' />
+          Checking...
+        </Button>
+      )
     }
 
     if (isSignedIn) {
-      return <div>Signed in</div>
+      return (
+        <Button color='google plus' onClick={this.onSignOutClick}>
+          <Icon name='google' />
+          Sign Out
+        </Button>
+      )
     }
 
-    return <div>Not signed in</div>
+    return (
+      <Button color='google plus' onClick={this.onSignInClick}>
+        <Icon name='google' />
+        Sign In with Google
+      </Button>
+    )
   }
 
   render() {
-    console.log(this.state.isSignedIn)
-
     return (
-      <div>{this.renderAuthButton()}</div>
+      <div>
+        {this.renderAuthButton()}
+      </div>
     )
   }
 }
