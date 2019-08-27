@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Form, Button, Message } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { createStream } from '../../actions'
 
 class Create extends Component {
-
   renderInput ({ input, label, meta }) {
     const { error, touched } = meta
     const showError = !!(touched && error)
@@ -17,8 +18,9 @@ class Create extends Component {
     )
   }
 
-  onFormSubmit (formValues) {
-    console.log(formValues)
+  onFormSubmit = (formValues) => {
+    const { createStream } = this.props
+    createStream(formValues)
   }
 
   render() {
@@ -59,4 +61,8 @@ const formOptions = {
 
 const addFormProps = reduxForm(formOptions)
 
-export default addFormProps(Create)
+const mapStateToProps = null
+const mapDispatchToProps = { createStream }
+const addReduxProps = connect(mapStateToProps, mapDispatchToProps)
+
+export default addReduxProps(addFormProps(Create))

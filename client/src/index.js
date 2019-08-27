@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
+import reduxThunk from 'redux-thunk'
 
 import reducers from './reducers'
 import App from './components/App'
@@ -11,7 +12,7 @@ const composeEnhancers = (
   compose
 )
 
-const middleware = applyMiddleware()
+const middleware = applyMiddleware(reduxThunk)
 const enhancers = composeEnhancers(middleware)
 const store = createStore(reducers, enhancers)
 
