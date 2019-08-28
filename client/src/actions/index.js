@@ -10,8 +10,11 @@ import {
   SIGN_OUT,
 } from './types'
 
-export const createStream = formValues => async dispatch => {
-  const response = await stream.post('/streams', formValues)
+export const createStream = formValues => async (dispatch, getState) => {
+  const state = getState()
+  const { userId } = state.auth
+  const postData = { ...formValues, userId }
+  const response = await stream.post('/streams', postData)
   dispatch({ type: CREATE_STREAM, payload: response.data })
 }
 
