@@ -22,7 +22,7 @@ const App = () => {
         <Route path='/' exact component={List} />
         <Route path='/stream/new' exact component={Create} />
         <Route path='/stream/edit/:id' exact component={Edit} />
-        <Route path='/stream/delete' exact component={Delete} />
+        <Route path='/stream/delete/:id' exact component={Delete} />
         <Route path='/stream/show' exact component={Show} />
       </Router>
     </Container>

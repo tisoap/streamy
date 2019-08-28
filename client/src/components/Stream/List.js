@@ -20,7 +20,13 @@ class StreamList extends Component {
           >
             Edit
           </Button>
-          <Button negative>Delete</Button>
+          <Button
+            negative
+            as={Link}
+            to={`/stream/delete/${stream.id}`}
+          >
+            Delete
+          </Button>
         </List.Content>
       )
     }
