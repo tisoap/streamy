@@ -1,15 +1,10 @@
 {
   "streams": [
     {
-      "title": "My stream",
-      "description": "hello there",
-      "id": 1
-    },
-    {
-      "title": "New Stream",
-      "description": "made by me",
+      "title": "My first stream",
+      "description": "Hello World!!",
       "userId": "108860806982599675201",
-      "id": 2
+      "id": 1
     }
   ]
 }

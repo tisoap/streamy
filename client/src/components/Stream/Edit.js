@@ -1,20 +1,37 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchStream } from '../../actions'
+import { Container } from 'semantic-ui-react'
+import { omit } from 'lodash'
+import { fetchStream, editStream } from '../../actions'
+import StreamForm from './Form'
 
 class Edit extends Component {
-  componentDidMount() {
+  componentDidMount () {
     const { fetchStream, match } = this.props
     const streamId = match.params.id
     fetchStream(streamId)
+  }
+
+  onSubmit = (formValues) => {
+    const { editStream, match } = this.props
+    const streamId = match.params.id
+    editStream(streamId, formValues)
   }
 
   render () {
     const { stream } = this.props
     if (!stream) return <div>Loading...</div>
 
+    const streamEditableValues = omit(stream, 'id', 'userId')
+
     return (
-      <div>{stream.title}</div>
+      <Container>
+        <h2>Edit a Stream</h2>
+        <StreamForm
+          onSubmit={this.onSubmit}
+          initialValues={streamEditableValues}
+        />
+      </Container>
     )
   }
 }
@@ -25,7 +42,7 @@ const mapStateToProps = (state, ownProps) => {
   return { stream }
 }
 
-const mapDispatchToProps = { fetchStream }
+const mapDispatchToProps = { fetchStream, editStream }
 const addReduxProps = connect(mapStateToProps, mapDispatchToProps)
 
 export default addReduxProps(Edit)
