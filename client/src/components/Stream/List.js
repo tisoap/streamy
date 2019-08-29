@@ -48,8 +48,12 @@ class StreamList extends Component {
         { this.renderStreamButtons(stream) }
         <List.Icon verticalAlign="middle" name="camera" size="large" />
         <List.Content>
-          <List.Header>{ stream.title }</List.Header>
-          <List.Description>{ stream.description }</List.Description>
+          <List.Header as={Link} to={`/stream/${stream.id}`}>
+            { stream.title }
+          </List.Header>
+          <List.Description>
+            { stream.description }
+          </List.Description>
         </List.Content>
       </List.Item>
     )
