@@ -4,7 +4,8 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "start": "json-server -p 3001 -w db.json"
+    "start:local": "json-server --port 3001 --watch db.json",
+    "start:docker": "json-server --host 0.0.0.0 --port 3001 --watch db.json"
   },
   "dependencies": {
     "json-server": "^0.15.0"
