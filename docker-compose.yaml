@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  api:
+    container_name: api
+    build: "./api-server"
+    ports:
+      - "3001:3001"
+    command: yarn start:docker
+
+  rtmp:
+    container_name: rtmp
+    build: "./rtmp-server"
+    ports:
+      - "8000:8000"
+      - "1935:1935"
+    command: yarn start
+
+  client:
+    container_name: client
+    build: "./client"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+      - rtmp
+    command: yarn serve
